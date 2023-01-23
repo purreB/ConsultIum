@@ -18,6 +18,6 @@ namespace Domain.Entities
     public string CustomerName { get; set; }
 
     [ForeignKey("ConsultantsIds")]
-    public List<Consultant> Consultants { get; set; }
+    public List<Guid> Consultants { get; set; }
   }
 }
