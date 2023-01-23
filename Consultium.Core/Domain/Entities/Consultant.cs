@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-  [Table("Consultant")]
+  [Table("Consultants")]
   public class Consultant
   {
     [Key]
@@ -21,5 +21,8 @@ namespace Domain.Entities
     public string LastName { get; set; }
     [Required]
     public Boolean HasAsignment { get; set; }
+
+    [ForeignKey("AssignedToCustomerId")]
+    public Guid Asignment { get; set; }
   }
 }
