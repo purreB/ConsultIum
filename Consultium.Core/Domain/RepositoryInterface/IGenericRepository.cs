@@ -9,6 +9,6 @@ namespace Domain.RepositoryInterface
   {
     Task<IEnumerable<T>> GetAllEntities();
     Task<T> GetEntityById(Guid id);
-    Task<T> AddEntity(T entity);
+    void AddEntity(T entity);
   }
 }

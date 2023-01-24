@@ -1,26 +1,33 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Consultium.Infrastructure;
 using Domain.RepositoryInterface;
+using Microsoft.EntityFrameworkCore;
 
 namespace Persistence.Repositories
 {
   public abstract class GenericRepository<T> : IGenericRepository<T> where T : class
   {
-    public Task<T> AddEntity(T entity)
+    protected readonly RepositoryDbContext _context;
+    public GenericRepository(RepositoryDbContext context)
     {
-      throw new NotImplementedException();
+      _context = context;
+    }
+    public async Task<IEnumerable<T>> GetAllEntities()
+    {
+      return await _context.Set<T>().ToListAsync();
     }
 
-    public Task<IEnumerable<T>> GetAllEntities()
+    public async Task<T> GetEntityById(Guid id)
     {
-      throw new NotImplementedException();
+      return await _context.Set<T>().FindAsync(id);
     }
 
-    public Task<T> GetEntityById(Guid id)
+    public void AddEntity(T entity)
     {
-      throw new NotImplementedException();
+      _context.Set<T>().Add(entity);
     }
+
   }
 }
