@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
+using Domain.Entities;
 
 namespace Consultium.Infrastructure
 {
@@ -13,5 +14,9 @@ namespace Consultium.Infrastructure
     {
       optionsBuilder.UseSqlite(@"DataSource=ConsultiumDb.db");
     }
+    public RepositoryDbContext(DbContextOptions<RepositoryDbContext> options) : base(options)
+    { }
+    public DbSet<Consultant> Consultants { get; set; }
+    public DbSet<Customer> Customers { get; set; }
   }
 }
