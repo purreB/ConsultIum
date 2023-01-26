@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Domain.RepositoryInterface;
 using Microsoft.EntityFrameworkCore;
 using Consultium.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 namespace Persistence.Repositories
 {
@@ -17,8 +18,7 @@ namespace Persistence.Repositories
       services.AddTransient<ICustomerRepository, CustomerRepository>();
       //services.AddTransient<IUnitOfWork, UnitOfWork>();
 
-      services.AddDbContext<RepositoryDbContext>(opt => opt
-          .UseSqlServer("Server=localhost,1433; Database=BooksDB;User Id=sa; Password=password_01;"));
+      services.AddDbContext<RepositoryDbContext>();
       return services;
     }
   }
