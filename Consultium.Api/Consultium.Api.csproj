@@ -14,6 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Consultium.Infrastructure\Persistence\Persistence.csproj" />
     <ProjectReference Include="..\Consultium.Core\Domain\Domain.csproj" />
+    <ProjectReference Include="..\Consultium.Core\Contracts\Contracts.csproj" />
   </ItemGroup>
 
 </Project>

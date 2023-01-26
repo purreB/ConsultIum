@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Contracts;
 using Domain.Entities;
 using Domain.RepositoryInterface;
 using Microsoft.AspNetCore.Mvc;
@@ -26,13 +27,18 @@ namespace Consultium.Api.Controllers
     }
 
     [HttpGet("{id}")]
-    public async Task<Consultant> GetById(Guid id)
+    public async Task<IActionResult> GetById(Guid id)
     {
-      return await _unitOfWork.Consultants.GetEntityById(id);
+      var consultant = await _unitOfWork.Consultants.GetEntityById(id);
+      if (consultant == null)
+      {
+        return NotFound();
+      }
+      return Ok(consultant);
     }
 
     // [HttpPost]
-    // public async Task<IActionResult> AddConsultant([FromBody] Consultant consultant)
+    // public async Task<IActionResult> AddConsultant(ConsultantForCreationDto consultantForCreationDto)
     // {
 
     // }
