@@ -12,6 +12,7 @@ namespace Domain.Entities
   {
     [Key]
     public Guid ConsultantId { get; set; }
+
     [Required]
     [StringLength(50)]
     public string FirstName { get; set; }
@@ -19,10 +20,14 @@ namespace Domain.Entities
     [Required]
     [StringLength(50)]
     public string LastName { get; set; }
+
+    [Required]
+    public string[] Skills { get; set; }
+
     [Required]
     public Boolean HasAsignment { get; set; }
 
     [ForeignKey("AssignedToCustomerId")]
-    public Guid Asignment { get; set; }
+    public Guid Assignment { get; set; }
   }
 }

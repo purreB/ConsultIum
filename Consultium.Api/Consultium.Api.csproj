@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Consultium.Infrastructure\Persistence\Persistence.csproj" />
+    <ProjectReference Include="..\Consultium.Core\Domain\Domain.csproj" />
   </ItemGroup>
 
 </Project>
