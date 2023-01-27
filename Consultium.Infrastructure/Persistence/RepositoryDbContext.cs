@@ -12,7 +12,8 @@ namespace Consultium.Infrastructure
   {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-      optionsBuilder.UseSqlite(@"DataSource=ConsultiumDb.db");
+      optionsBuilder.UseNpgsql(@"Host=localhost;Username=postgres;Password=root;Database=ConsultiumDb");
+      //optionsBuilder.UseSqlite(@"DataSource=ConsultiumDb.db");
     }
     public RepositoryDbContext(DbContextOptions<RepositoryDbContext> options) : base(options)
     { }
