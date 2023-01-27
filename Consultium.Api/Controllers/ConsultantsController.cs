@@ -29,17 +29,28 @@ namespace Consultium.Api.Controllers
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(Guid id)
     {
-      var consultant = await _unitOfWork.Consultants.GetEntityById(id);
-      if (consultant == null)
+      try
       {
-        return NotFound();
+        var consultant = await _unitOfWork.Consultants.GetEntityById(id);
+        if (consultant == null)
+        {
+          return NotFound();
+        }
+        return Ok(consultant);
       }
-      return Ok(consultant);
+      catch (System.Exception)
+      {
+        throw;
+      }
     }
 
     // [HttpPost]
     // public async Task<IActionResult> AddConsultant(ConsultantForCreationDto consultantForCreationDto)
     // {
+    //   var consultant = new Consultant();
+    //   consultant.ConsultantId = Guid.NewGuid();
+    //   consultant.FirstName = consultantForCreationDto.FirstName;
+    //   consultant.LastName = consultantForCreationDto.LastName;
 
     // }
   }
