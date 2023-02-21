@@ -10,14 +10,28 @@ namespace Consultium.Infrastructure
 {
   public class RepositoryDbContext : DbContext
   {
+    public DbSet<Consultant> consultants { get; set; }
+    public DbSet<Customer> customers { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-      optionsBuilder.UseNpgsql(@"Host=localhost;Username=postgres;Password=root;Database=ConsultiumDb");
+      optionsBuilder.UseNpgsql(@"Host=localhost;Username=postgres;Password=root;Database=ConsultiumDb")
+      .UseSnakeCaseNamingConvention();
       //optionsBuilder.UseSqlite(@"DataSource=ConsultiumDb.db");
     }
     public RepositoryDbContext(DbContextOptions<RepositoryDbContext> options) : base(options)
     { }
-    public DbSet<Consultant> Consultants { get; set; }
-    public DbSet<Customer> Customers { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+      modelBuilder.HasDefaultSchema("public");
+      base.OnModelCreating(modelBuilder);
+
+      modelBuilder.Entity<Consultant>(entity =>
+    {
+      entity.HasOne(x => x.Customer)
+        .WithOne()
+        .HasForeignKey("CustomerId");
+    });
+    }
   }
 }

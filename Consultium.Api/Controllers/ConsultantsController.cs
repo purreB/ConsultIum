@@ -23,7 +23,15 @@ namespace Consultium.Api.Controllers
     [HttpGet]
     public async Task<IEnumerable<Consultant>> GetAllConsultants()
     {
-      return await _unitOfWork.Consultants.GetAllEntities();
+      var consultants = await _unitOfWork.Consultants.GetAllEntities();
+      if (!consultants.Any())
+      {
+        return (IEnumerable<Consultant>)NotFound();
+      }
+      else
+      {
+        return consultants;
+      }
     }
 
     [HttpGet("{id}")]

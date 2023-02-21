@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-  [Table("Customers")]
+  [Table("customers")]
   public class Customer
   {
     [Key]
@@ -17,7 +17,7 @@ namespace Domain.Entities
     [MaxLength(50)]
     public string CompanyName { get; set; }
 
-    [ForeignKey("ConsultantsIds")]
+    [ForeignKey("ConsultantId")]
     public List<Guid> Consultants { get; set; }
   }
 }
