@@ -21,16 +21,18 @@ namespace Consultium.Api.Controllers
     }
 
     [HttpGet]
-    public async Task<IEnumerable<Consultant>> GetAllConsultants()
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Consultant>))]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetAllConsultants()
     {
-      var consultants = await _unitOfWork.Consultants.GetAllEntities();
-      if (!consultants.Any())
+      var Consultants = await _unitOfWork.Consultants.GetAllEntities();
+      if (!Consultants.Any())
       {
-        return (IEnumerable<Consultant>)NotFound();
+        return NotFound();
       }
       else
       {
-        return consultants;
+        return Ok(Consultants);
       }
     }
 
