@@ -11,6 +11,8 @@ namespace Contracts
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string[] Skills { get; set; }
-    public string Assignment { get; set; }
+    public bool HasAsignment { get; set; }
+
+    public string? Assignment { get; set; }
   }
 }

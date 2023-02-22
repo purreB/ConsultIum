@@ -56,14 +56,19 @@ namespace Consultium.Api.Controllers
       }
     }
 
-    // [HttpPost]
-    // public async Task<IActionResult> AddConsultant(ConsultantForCreationDto consultantForCreationDto)
-    // {
-    //   var consultant = new Consultant();
-    //   consultant.ConsultantId = Guid.NewGuid();
-    //   consultant.FirstName = consultantForCreationDto.FirstName;
-    //   consultant.LastName = consultantForCreationDto.LastName;
+    [HttpPost]
+    public async Task<IActionResult> AddConsultant(ConsultantForCreationDto consultantForCreationDto)
+    {
+      var consultant = new Consultant();
+      consultant.ConsultantId = Guid.NewGuid();
+      consultant.FirstName = consultantForCreationDto.FirstName;
+      consultant.LastName = consultantForCreationDto.LastName;
+      consultant.Skills = consultantForCreationDto.Skills;
+      consultant.HasAsignment = consultantForCreationDto.HasAsignment;
 
-    // }
+      await _unitOfWork.Consultants.AddEntity(consultant);
+      _unitOfWork.Complete();
+      return CreatedAtAction(nameof(GetById), new { id = consultant.ConsultantId }, consultant);
+    }
   }
 }

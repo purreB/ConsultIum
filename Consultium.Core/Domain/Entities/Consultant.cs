@@ -27,9 +27,9 @@ namespace Domain.Entities
     [Required]
     public Boolean HasAsignment { get; set; }
 
-    public Guid CustomerId { get; set; }
+    public Guid? CustomerId { get; set; }
 
     [ForeignKey("CustomerId")]
-    public Customer Customer { get; set; }
+    public Customer? Customer { get; set; }
   }
 }
