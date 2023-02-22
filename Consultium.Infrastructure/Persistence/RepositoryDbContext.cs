@@ -14,8 +14,9 @@ namespace Consultium.Infrastructure
     public DbSet<Customer> customers { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-      optionsBuilder.UseNpgsql(@"Host=localhost;Username=postgres;Password=root;Database=ConsultiumDb")
+      optionsBuilder.UseNpgsql(@"Host=localhost;Username=postgres;Password=root;Database=ConsultiumDb", b => b.MigrationsAssembly("Consultium.Api"))
       .UseSnakeCaseNamingConvention();
+      // options.UseSqlServer(connection, b => b.MigrationsAssembly("Consultium.Api"))
       //optionsBuilder.UseSqlite(@"DataSource=ConsultiumDb.db");
     }
     public RepositoryDbContext(DbContextOptions<RepositoryDbContext> options) : base(options)
@@ -23,15 +24,15 @@ namespace Consultium.Infrastructure
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-      modelBuilder.HasDefaultSchema("public");
-      base.OnModelCreating(modelBuilder);
+      // modelBuilder.HasDefaultSchema("public");
+      // base.OnModelCreating(modelBuilder);
 
-      modelBuilder.Entity<Consultant>(entity =>
-    {
-      entity.HasOne(x => x.Customer)
-        .WithOne()
-        .HasForeignKey("CustomerId");
-    });
+      //   modelBuilder.Entity<Consultant>(entity =>
+      // {
+      //   entity.HasOne(x => x.Customer)
+      //     .WithOne()
+      //     .HasForeignKey("CustomerId");
+      // });
     }
   }
 }

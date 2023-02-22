@@ -17,7 +17,9 @@ namespace Domain.Entities
     [MaxLength(50)]
     public string CompanyName { get; set; }
 
-    [ForeignKey("ConsultantId")]
-    public List<Guid> Consultants { get; set; }
+    public List<Guid> ConsultantIds { get; set; }
+
+    [ForeignKey("ConsultantIds")]
+    public List<Consultant> Consultants { get; set; }
   }
 }
