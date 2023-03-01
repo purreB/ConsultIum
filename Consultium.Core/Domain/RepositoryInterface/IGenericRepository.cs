@@ -10,5 +10,7 @@ namespace Domain.RepositoryInterface
     Task<IEnumerable<T>> GetAllEntities();
     Task<T> GetEntityById(Guid id);
     Task AddEntity(T entity);
+
+    void UpdateEntity(T entity);
   }
 }

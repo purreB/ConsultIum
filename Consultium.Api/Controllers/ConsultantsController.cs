@@ -76,7 +76,7 @@ namespace Consultium.Api.Controllers
     [HttpPatch]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Consultant))]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> UpdateConsultant(Guid id, ConsultantForUpdateDto consult)
+    public async Task<IActionResult> UpdateConsultant(ConsultantForUpdateDto consult)
     {
       try
       {
@@ -90,7 +90,7 @@ namespace Consultium.Api.Controllers
         _unitOfWork.Consultants.UpdateEntity(consultant);
         _unitOfWork.Complete();
 
-        return CreatedAtAction(nameof(GetById), new { id = consult.Id }, consult);
+        return CreatedAtAction(nameof(GetById), new { id = consult.Id }, consultant);
       }
       catch (System.Exception)
       {

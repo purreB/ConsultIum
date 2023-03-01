@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Contracts
 {
-  public class ConsultantDto
+  public class ConsultantForUpdateDto
   {
     public Guid Id { get; set; }
     public string FirstName { get; set; }

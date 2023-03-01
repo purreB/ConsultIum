@@ -27,5 +27,10 @@ namespace Persistence.Repositories
     {
       await _context.Set<T>().AddAsync(entity);
     }
+
+    public void UpdateEntity(T entity)
+    {
+      _context.Set<T>().Update(entity);
+    }
   }
 }

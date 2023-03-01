@@ -8,6 +8,5 @@ namespace Domain.RepositoryInterface
 {
   public interface IConsultantRepository : IGenericRepository<Consultant>
   {
-
   }
 }
