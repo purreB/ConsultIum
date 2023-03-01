@@ -57,6 +57,8 @@ namespace Consultium.Api.Controllers
     }
 
     [HttpPost]
+    [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Consultant))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> AddConsultant(ConsultantForCreationDto consultantForCreationDto)
     {
       var consultant = new Consultant();
@@ -69,6 +71,33 @@ namespace Consultium.Api.Controllers
       await _unitOfWork.Consultants.AddEntity(consultant);
       _unitOfWork.Complete();
       return CreatedAtAction(nameof(GetById), new { id = consultant.ConsultantId }, consultant);
+    }
+
+    [HttpPatch]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Consultant))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> UpdateConsultant(Guid id, ConsultantForUpdateDto consult)
+    {
+      try
+      {
+        var consultant = new Consultant();
+        consultant.ConsultantId = consult.Id;
+        consultant.FirstName = consult.FirstName;
+        consultant.LastName = consult.LastName;
+        consultant.Skills = consult.Skills;
+        consultant.HasAsignment = consult.HasAsignment;
+
+        _unitOfWork.Consultants.UpdateEntity(consultant);
+        _unitOfWork.Complete();
+
+        return CreatedAtAction(nameof(GetById), new { id = consult.Id }, consult);
+      }
+      catch (System.Exception)
+      {
+
+        throw;
+      }
+
     }
   }
 }
