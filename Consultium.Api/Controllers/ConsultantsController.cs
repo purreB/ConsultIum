@@ -21,7 +21,7 @@ namespace Consultium.Api.Controllers
     }
 
     [HttpGet]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Consultant>))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ConsultantDto>))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetAllConsultants()
     {

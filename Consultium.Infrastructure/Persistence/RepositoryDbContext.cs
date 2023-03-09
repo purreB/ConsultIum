@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Domain.Entities;
-
 namespace Consultium.Infrastructure
 {
   public class RepositoryDbContext : DbContext
