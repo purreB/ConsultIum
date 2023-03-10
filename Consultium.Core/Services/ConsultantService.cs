@@ -29,8 +29,8 @@ namespace Services
       {
         throw new ArgumentException(nameof(Consultants));
       }
-      var consultantDto = Consultants.Adapt<IEnumerable<Consultant>>();
-      return (IEnumerable<ConsultantDto>)consultantDto;
+      var consultantDto = Consultants.Adapt<IEnumerable<ConsultantDto>>();
+      return consultantDto;
     }
 
     public Task<ConsultantDto> GetByIdAsync(Guid Id, CancellationToken cancellationToken = default)

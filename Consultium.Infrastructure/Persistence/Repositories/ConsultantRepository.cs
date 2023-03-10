@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Consultium.Infrastructure;
 using Domain.RepositoryInterface;
 using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Persistence.Repositories
 {
@@ -18,11 +19,8 @@ namespace Persistence.Repositories
       throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<Consultant>> GetAllConsultants()
-    {
-      Console.WriteLine("Hit get all consultants inside repository");
-      throw new NotImplementedException();
-    }
+    public async Task<IEnumerable<Consultant>> GetAllConsultants() => await _dbContext.consultants.ToListAsync();
+
 
     public Task<Consultant> GetConsultantById(Guid id)
     {
