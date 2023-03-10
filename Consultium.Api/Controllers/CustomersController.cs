@@ -6,6 +6,7 @@ using Domain.Entities;
 using Domain.RepositoryInterface;
 using Microsoft.AspNetCore.Mvc;
 using Contracts;
+using Services.Abstractions;
 
 namespace Consultium.Api.Controllers
 {
@@ -13,19 +14,16 @@ namespace Consultium.Api.Controllers
   [Route("api/[controller]")]
   public class CustomersController : ControllerBase
   {
-    private IUnitOfWork _unitOfWork;
+    private IServiceManager _serviceManager;
 
-    public CustomersController(IUnitOfWork unitOfWork)
-    {
-      _unitOfWork = unitOfWork;
-    }
+    public CustomersController(IServiceManager serviceManager) => _serviceManager = serviceManager;
 
     [HttpGet]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Customer>))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<CustomerDto>))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetAllCustomers()
     {
-      var Customers = await _unitOfWork.Customers.GetAllEntities();
+      var Customers = await _serviceManager.CustomerService.GetAllAsync();
       if (!Customers.Any())
       {
         return NotFound();
@@ -37,13 +35,13 @@ namespace Consultium.Api.Controllers
     }
 
     [HttpGet("{id}")]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Customer))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CustomerDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(Guid id)
     {
       try
       {
-        var Customer = await _unitOfWork.Customers.GetEntityById(id);
+        var Customer = await _serviceManager.CustomerService.GetByIdAsync(id);
         if (Customer == null)
         {
           return NotFound();
@@ -56,19 +54,19 @@ namespace Consultium.Api.Controllers
       }
     }
     [HttpPost]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Customer))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CustomerDto))]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> AddCustomer(CustomerForCreationDto customerForCreationDto)
     {
       try
       {
-        var customer = new Customer();
+        var customer = new CustomerForCreationDto();
         customer.CustomerId = Guid.NewGuid();
         customer.CompanyName = customerForCreationDto.CompanyName;
         customer.ConsultantIds = customerForCreationDto.ConsultantIds.ToList();
 
-        await _unitOfWork.Customers.AddEntity(customer);
-        _unitOfWork.Complete();
+        //! DO UNIT OF WORK COMPLETE INSIDE SERVICE
+        await _serviceManager.CustomerService.CreateAsync(customer);
 
         return CreatedAtAction(nameof(GetById), new { id = customer.CustomerId }, customer);
       }

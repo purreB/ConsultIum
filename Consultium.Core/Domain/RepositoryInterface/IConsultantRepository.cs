@@ -6,7 +6,12 @@ using Domain.Entities;
 
 namespace Domain.RepositoryInterface
 {
-  public interface IConsultantRepository : IGenericRepository<Consultant>
+  public interface IConsultantRepository
   {
+    Task<IEnumerable<Consultant>> GetAllConsultants();
+    Task<Consultant> GetConsultantById(Guid id);
+    Task AddConsultant(Consultant consultant);
+
+    void UpdateConsultant(Consultant consultant);
   }
 }

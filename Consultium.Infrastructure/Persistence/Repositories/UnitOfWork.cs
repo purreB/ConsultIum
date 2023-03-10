@@ -7,12 +7,14 @@ using Domain.RepositoryInterface;
 
 namespace Persistence.Repositories
 {
-  public class UnitOfWork : IUnitOfWork
+  internal class UnitOfWork : IUnitOfWork
   {
     private readonly RepositoryDbContext _context;
+    private readonly RepositoryDbContext _dbContext;
     public IConsultantRepository Consultants { get; }
 
     public ICustomerRepository Customers { get; }
+    public UnitOfWork(RepositoryDbContext dbContext) => _dbContext = dbContext;
 
     public UnitOfWork(RepositoryDbContext context, IConsultantRepository consultantRepository, ICustomerRepository customerRepository)
     {
@@ -20,6 +22,8 @@ namespace Persistence.Repositories
       this.Consultants = consultantRepository;
       this.Customers = customerRepository;
     }
+
+
     public int Complete()
     {
       return _context.SaveChanges();
