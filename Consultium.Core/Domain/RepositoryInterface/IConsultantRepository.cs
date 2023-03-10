@@ -8,7 +8,7 @@ namespace Domain.RepositoryInterface
 {
   public interface IConsultantRepository
   {
-    Task<IEnumerable<Consultant>> GetAllConsultants();
+    Task<IEnumerable<Consultant>> GetAllConsultants(CancellationToken cancellationToken);
     Task<Consultant> GetConsultantById(Guid id);
     Task AddConsultant(Consultant consultant);
 

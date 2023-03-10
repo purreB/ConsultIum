@@ -24,7 +24,7 @@ namespace Services
     public async Task<IEnumerable<ConsultantDto>> GetAllAsync(CancellationToken cancellationToken = default)
     {
       Console.WriteLine("Hit get all async inside service");
-      var Consultants = await _repositoryManager.ConsultantRepository.GetAllConsultants();
+      var Consultants = await _repositoryManager.ConsultantRepository.GetAllConsultants(cancellationToken);
       if (Consultants == null)
       {
         throw new ArgumentException(nameof(Consultants));

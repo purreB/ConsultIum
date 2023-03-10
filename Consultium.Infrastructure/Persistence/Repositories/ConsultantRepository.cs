@@ -19,7 +19,8 @@ namespace Persistence.Repositories
       throw new NotImplementedException();
     }
 
-    public async Task<IEnumerable<Consultant>> GetAllConsultants() => await _dbContext.consultants.ToListAsync();
+    public async Task<IEnumerable<Consultant>> GetAllConsultants(CancellationToken cancellationToken = default)
+    => await _dbContext.consultants.ToListAsync(cancellationToken);
 
 
     public Task<Consultant> GetConsultantById(Guid id)
