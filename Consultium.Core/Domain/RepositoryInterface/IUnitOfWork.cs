@@ -9,6 +9,6 @@ namespace Domain.RepositoryInterface
   {
     IConsultantRepository Consultants { get; }
     ICustomerRepository Customers { get; }
-    int Complete();
+    Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
   }
 }

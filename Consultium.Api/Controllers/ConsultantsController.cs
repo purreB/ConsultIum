@@ -52,16 +52,8 @@ namespace Consultium.Api.Controllers
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> AddConsultant(ConsultantForCreationDto consultantForCreationDto)
     {
-      var consultant = new ConsultantForCreationDto();
-      consultant.ConsultantId = Guid.NewGuid();
-      consultant.FirstName = consultantForCreationDto.FirstName;
-      consultant.LastName = consultantForCreationDto.LastName;
-      consultant.Skills = consultantForCreationDto.Skills;
-      consultant.HasAsignment = consultantForCreationDto.HasAsignment;
-
-      //! DO UNIT OF WORK COMPLETE INSIDE SERVICE
-      await _serviceManager.ConsultantService.CreateAsync(consultant);
-      return CreatedAtAction(nameof(GetById), new { id = consultant.ConsultantId }, consultant);
+      var consultantDto = await _serviceManager.ConsultantService.CreateAsync(consultantForCreationDto);
+      return CreatedAtAction(nameof(GetById), new { id = consultantDto.Id });
     }
 
     [HttpPatch]

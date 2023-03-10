@@ -24,10 +24,7 @@ namespace Persistence.Repositories
     }
 
 
-    public int Complete()
-    {
-      return _context.SaveChanges();
-    }
+    public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) => _dbContext.SaveChangesAsync(cancellationToken);
 
     public void Dispose()
     {

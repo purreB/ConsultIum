@@ -16,9 +16,12 @@ namespace Services
     private readonly IRepositoryManager _repositoryManager;
     public ConsultantService(IRepositoryManager repositoryManager) => _repositoryManager = repositoryManager;
 
-    public Task<ConsultantForCreationDto> CreateAsync(ConsultantForCreationDto consultantForCreationDto, CancellationToken cancellationToken = default)
+    public async Task<ConsultantForCreationDto> CreateAsync(ConsultantForCreationDto consultantForCreationDto, CancellationToken cancellationToken = default)
     {
-      throw new NotImplementedException();
+      var consultatForCreation = consultantForCreationDto.Adapt<Consultant>();
+      _repositoryManager.ConsultantRepository.AddConsultant(consultatForCreation);
+      await _repositoryManager.UnitOfWork.SaveChangesAsync(cancellationToken);
+      return consultatForCreation.Adapt<ConsultantForCreationDto>();
     }
 
     public async Task<IEnumerable<ConsultantDto>> GetAllAsync(CancellationToken cancellationToken = default)

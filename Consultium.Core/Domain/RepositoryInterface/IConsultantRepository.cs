@@ -10,7 +10,7 @@ namespace Domain.RepositoryInterface
   {
     Task<IEnumerable<Consultant>> GetAllConsultants(CancellationToken cancellationToken);
     Task<Consultant> GetConsultantById(Guid id);
-    Task AddConsultant(Consultant consultant);
+    void AddConsultant(Consultant consultant);
 
     void UpdateConsultant(Consultant consultant);
   }

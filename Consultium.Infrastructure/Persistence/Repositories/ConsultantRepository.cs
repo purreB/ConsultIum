@@ -14,17 +14,14 @@ namespace Persistence.Repositories
     private readonly RepositoryDbContext _dbContext;
     public ConsultantRepository(RepositoryDbContext dbContext) => _dbContext = dbContext;
 
-    public Task AddConsultant(Consultant consultant)
-    {
-      throw new NotImplementedException();
-    }
-
     public async Task<IEnumerable<Consultant>> GetAllConsultants(CancellationToken cancellationToken = default)
     => await _dbContext.consultants.ToListAsync(cancellationToken);
 
 
     public async Task<Consultant> GetConsultantById(Guid id)
     => await _dbContext.consultants.FindAsync(id);
+
+    public void AddConsultant(Consultant consultant) => _dbContext.consultants.Add(consultant);
 
     public void UpdateConsultant(Consultant consultant)
     {
