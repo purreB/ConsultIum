@@ -23,7 +23,6 @@ namespace Services
 
     public async Task<IEnumerable<ConsultantDto>> GetAllAsync(CancellationToken cancellationToken = default)
     {
-      Console.WriteLine("Hit get all async inside service");
       var Consultants = await _repositoryManager.ConsultantRepository.GetAllConsultants(cancellationToken);
       if (Consultants == null)
       {
@@ -33,9 +32,15 @@ namespace Services
       return consultantDto;
     }
 
-    public Task<ConsultantDto> GetByIdAsync(Guid Id, CancellationToken cancellationToken = default)
+    public async Task<ConsultantDto> GetByIdAsync(Guid Id, CancellationToken cancellationToken = default)
     {
-      throw new NotImplementedException();
+      var Consultant = await _repositoryManager.ConsultantRepository.GetConsultantById(Id);
+      if (Consultant == null)
+      {
+        throw new ArgumentException(nameof(Consultant));
+      }
+      var consultantDto = Consultant.Adapt<ConsultantDto>();
+      return consultantDto;
     }
 
     public void UpdateConsultant(ConsultantDto consultantToUpdate, CancellationToken cancellationToken = default)

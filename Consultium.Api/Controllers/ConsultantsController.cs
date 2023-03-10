@@ -39,19 +39,12 @@ namespace Consultium.Api.Controllers
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(Guid id)
     {
-      try
+      var Consultant = await _serviceManager.ConsultantService.GetByIdAsync(id);
+      if (Consultant == null)
       {
-        var Consultant = await _serviceManager.ConsultantService.GetByIdAsync(id);
-        if (Consultant == null)
-        {
-          return NotFound();
-        }
-        return Ok(Consultant);
+        return NotFound();
       }
-      catch (System.Exception)
-      {
-        throw;
-      }
+      return Ok(Consultant);
     }
 
     [HttpPost]

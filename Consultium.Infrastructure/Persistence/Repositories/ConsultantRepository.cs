@@ -23,10 +23,8 @@ namespace Persistence.Repositories
     => await _dbContext.consultants.ToListAsync(cancellationToken);
 
 
-    public Task<Consultant> GetConsultantById(Guid id)
-    {
-      throw new NotImplementedException();
-    }
+    public async Task<Consultant> GetConsultantById(Guid id)
+    => await _dbContext.consultants.FindAsync(id);
 
     public void UpdateConsultant(Consultant consultant)
     {
