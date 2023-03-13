@@ -23,7 +23,7 @@ builder.Logging.ClearProviders();
 builder.Host.UseSerilog((hostContext, services, configuration) =>
 {
   configuration
-      .WriteTo.File("serilog-file.txt")
+      //.WriteTo.File("serilog-file.txt")
       .WriteTo.Console();
 });
 
