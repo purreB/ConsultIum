@@ -56,30 +56,13 @@ namespace Consultium.Api.Controllers
       return CreatedAtAction(nameof(GetById), new { id = consultantDto.ConsultantId }, consultantDto);
     }
 
-    [HttpPatch]
+    [HttpPatch("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ConsultantDto))]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> UpdateConsultant(ConsultantForUpdateDto consult)
+    public async Task<IActionResult> UpdateConsultant(ConsultantForUpdateDto consultant, Guid id)
     {
-      try
-      {
-        var consultant = new ConsultantDto();
-        consultant.ConsultantId = consult.Id;
-        consultant.FirstName = consult.FirstName;
-        consultant.LastName = consult.LastName;
-        consultant.Skills = consult.Skills;
-        consultant.HasAsignment = consult.HasAsignment;
-
-        _serviceManager.ConsultantService.UpdateConsultant(consultant);
-
-        return CreatedAtAction(nameof(GetById), new { id = consult.Id }, consultant);
-      }
-      catch (System.Exception)
-      {
-
-        throw;
-      }
-
+      var consultantDto = await _serviceManager.ConsultantService.UpdateConsultant(consultant, id);
+      return CreatedAtAction(nameof(GetById), new { id = consultantDto.ConsultantId }, consultantDto);
     }
   }
 }

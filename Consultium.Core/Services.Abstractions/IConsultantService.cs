@@ -10,7 +10,7 @@ namespace Services.Abstractions
   {
     Task<IEnumerable<ConsultantDto>> GetAllAsync(CancellationToken cancellationToken = default);
     Task<ConsultantDto> GetByIdAsync(Guid Id, CancellationToken cancellationToken = default);
-    Task<ConsultantForCreationDto> CreateAsync(ConsultantForCreationDto consultantForCreationDto, CancellationToken cancellationToken = default);
-    void UpdateConsultant(ConsultantDto consultantToUpdate, CancellationToken cancellationToken = default);
+    Task<ConsultantDto> CreateAsync(ConsultantForCreationDto consultantForCreationDto, CancellationToken cancellationToken = default);
+    Task<ConsultantDto> UpdateConsultant(ConsultantForUpdateDto consultantToUpdate, Guid id, CancellationToken cancellationToken = default);
   }
 }

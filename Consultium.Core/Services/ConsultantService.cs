@@ -16,15 +16,6 @@ namespace Services
     private readonly IRepositoryManager _repositoryManager;
     public ConsultantService(IRepositoryManager repositoryManager) => _repositoryManager = repositoryManager;
 
-    public async Task<ConsultantForCreationDto> CreateAsync(ConsultantForCreationDto consultantForCreationDto, CancellationToken cancellationToken = default)
-    {
-      var consultatForCreation = consultantForCreationDto.Adapt<Consultant>();
-      _repositoryManager.ConsultantRepository.AddConsultant(consultatForCreation);
-      await _repositoryManager.UnitOfWork.SaveChangesAsync(cancellationToken);
-      var consultantToReturn = consultatForCreation.Adapt<ConsultantForCreationDto>();
-      return consultantToReturn;
-    }
-
     public async Task<IEnumerable<ConsultantDto>> GetAllAsync(CancellationToken cancellationToken = default)
     {
       var Consultants = await _repositoryManager.ConsultantRepository.GetAllConsultants(cancellationToken);
@@ -47,9 +38,23 @@ namespace Services
       return consultantDto;
     }
 
-    public void UpdateConsultant(ConsultantDto consultantToUpdate, CancellationToken cancellationToken = default)
+    public async Task<ConsultantDto> CreateAsync(ConsultantForCreationDto consultantForCreationDto, CancellationToken cancellationToken = default)
     {
-      throw new NotImplementedException();
+      var consultatForCreation = consultantForCreationDto.Adapt<Consultant>();
+      _repositoryManager.ConsultantRepository.AddConsultant(consultatForCreation);
+      await _repositoryManager.UnitOfWork.SaveChangesAsync(cancellationToken);
+      var consultantToReturn = consultatForCreation.Adapt<ConsultantDto>();
+      return consultantToReturn;
+    }
+
+    public async Task<ConsultantDto> UpdateConsultant(ConsultantForUpdateDto consultantForUpdateDto, Guid id, CancellationToken cancellationToken = default)
+    {
+      var consultantToUpdate = consultantForUpdateDto.Adapt<Consultant>();
+      consultantToUpdate.ConsultantId = id;
+      _repositoryManager.ConsultantRepository.UpdateConsultant(consultantToUpdate);
+      await _repositoryManager.UnitOfWork.SaveChangesAsync(cancellationToken);
+      var consultantToReturn = consultantToUpdate.Adapt<ConsultantDto>();
+      return consultantToReturn;
     }
   }
 }
