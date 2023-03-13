@@ -1,0 +1,17 @@
+2023-03-13 15:45:43.000 +01:00 [INF] Now listening on: http://localhost:5191
+2023-03-13 15:45:43.010 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-03-13 15:45:43.011 +01:00 [INF] Hosting environment: Development
+2023-03-13 15:45:43.011 +01:00 [INF] Content root path: C:\Users\jakber\Documents\Personal Projects\ConsultIum\Consultium.Api
+2023-03-13 15:45:52.446 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5191/api/Consultants - -
+2023-03-13 15:45:52.476 +01:00 [WRN] Failed to determine the https port for redirect.
+2023-03-13 15:45:52.480 +01:00 [INF] Executing endpoint 'Consultium.Api.Controllers.ConsultantsController.GetAllConsultants (Consultium.Api)'
+2023-03-13 15:45:52.491 +01:00 [INF] Route matched with {action = "GetAllConsultants", controller = "Consultants"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllConsultants() on controller Consultium.Api.Controllers.ConsultantsController (Consultium.Api).
+2023-03-13 15:45:52.768 +01:00 [WRN] Navigations 'Consultant.Customer' and 'Customer.Consultants' were separated into two relationships since the [ForeignKey] attribute was specified on navigations on both sides.
+2023-03-13 15:45:53.151 +01:00 [INF] Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c.consultant_id, c.consultant_ids, c.customer_id, c.first_name, c.has_assignment, c.last_name, c.skills
+FROM consultants AS c
+2023-03-13 15:45:53.261 +01:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectListIterator`2[[Domain.Entities.Consultant, Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[Contracts.ConsultantDto, Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2023-03-13 15:45:53.292 +01:00 [INF] Executed action Consultium.Api.Controllers.ConsultantsController.GetAllConsultants (Consultium.Api) in 796.7846ms
+2023-03-13 15:45:53.294 +01:00 [INF] Executed endpoint 'Consultium.Api.Controllers.ConsultantsController.GetAllConsultants (Consultium.Api)'
+2023-03-13 15:45:53.301 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5191/api/Consultants - - - 200 - application/json;+charset=utf-8 856.0768ms
+2023-03-13 15:45:57.836 +01:00 [INF] Application is shutting down...

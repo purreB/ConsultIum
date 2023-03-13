@@ -3,6 +3,7 @@ using Persistence.Repositories;
 using Services;
 using Services.Abstractions;
 using Domain.RepositoryInterface;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,14 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IServiceManager, ServiceManager>();
 builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 builder.Services.AddScoped<RepositoryDbContext>();
+builder.Logging.ClearProviders();
+
+builder.Host.UseSerilog((hostContext, services, configuration) =>
+{
+  configuration
+      .WriteTo.File("serilog-file.txt")
+      .WriteTo.Console();
+});
 
 var app = builder.Build();
 

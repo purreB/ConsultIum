@@ -13,5 +13,7 @@ namespace Domain.RepositoryInterface
     void AddConsultant(Consultant consultant);
 
     void UpdateConsultant(Consultant consultant);
+
+    //void DeleteConsultant(Consultant consultant);
   }
 }

@@ -57,5 +57,13 @@ namespace Consultium.Api.Controllers
       var consultantDto = await _serviceManager.ConsultantService.UpdateConsultant(consultant, id);
       return CreatedAtAction(nameof(GetById), new { id = consultantDto.ConsultantId }, consultantDto);
     }
+
+    // [HttpDelete("{id}")]
+    // [ProducesResponseType(StatusCodes.Status204NoContent)]
+    // public async Task<IActionResult> DeleteConsultant(ConsultantDto consultantDto)
+    // {
+    //   await _serviceManager.ConsultantService.DeleteConsultant(consultantDto);
+    //   return NoContent();
+    // }
   }
 }

@@ -24,5 +24,7 @@ namespace Persistence.Repositories
     public void AddConsultant(Consultant consultant) => _dbContext.consultants.Add(consultant);
 
     public void UpdateConsultant(Consultant consultant) => _dbContext.consultants.Update(consultant);
+
+    //public void DeleteConsultant(Consultant consultant) => _dbContext.consultants.Remove(consultant);
   }
 }

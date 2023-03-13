@@ -49,5 +49,20 @@ namespace Services
       var consultantToReturn = consultantToUpdate.Adapt<ConsultantDto>();
       return consultantToReturn;
     }
+
+    // public async Task DeleteConsultant(ConsultantDto consultantDto, CancellationToken cancellationToken = default)
+    // {
+    //   try
+    //   {
+    //     // var consultantDtoToRemove = await GetByIdAsync(id);
+    //     var consultantToRemove = consultantDto.Adapt<Consultant>();
+    //     _repositoryManager.ConsultantRepository.DeleteConsultant(consultantToRemove);
+    //     await _repositoryManager.UnitOfWork.SaveChangesAsync(cancellationToken);
+    //   }
+    //   catch (System.Exception)
+    //   {
+    //     throw;
+    //   }
+    // }
   }
 }
