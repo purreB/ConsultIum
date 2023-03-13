@@ -4,11 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Contracts;
 using Domain.RepositoryInterface;
+using Mapster;
 using Services.Abstractions;
 
 namespace Services
 {
-  public class UserService : IUserService
+  internal sealed class UserService : IUserService
   {
     private readonly IRepositoryManager _repositoryManager;
     public UserService(IRepositoryManager repositoryManager) => _repositoryManager = repositoryManager;
@@ -17,9 +18,11 @@ namespace Services
       throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<UserDto>> GetAllAsync(CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<UserDto>> GetAllAsync(CancellationToken cancellationToken = default)
     {
-      throw new NotImplementedException();
+      var Users = await _repositoryManager.UserRepository.GetAllUsers(cancellationToken);
+      var userDto = Users.Adapt<IEnumerable<UserDto>>();
+      return userDto;
     }
 
     public Task<UserDto> GetByIdAsync(Guid Id, CancellationToken cancellationToken = default)

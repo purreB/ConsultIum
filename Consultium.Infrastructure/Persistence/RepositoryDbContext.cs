@@ -11,6 +11,7 @@ namespace Consultium.Infrastructure
   {
     public DbSet<Consultant> consultants { get; set; }
     public DbSet<Customer> customers { get; set; }
+    public DbSet<User> users { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
       optionsBuilder.UseNpgsql(@"Host=localhost;Username=postgres;Password=root;Database=ConsultiumDb", b => b.MigrationsAssembly("Consultium.Api"))

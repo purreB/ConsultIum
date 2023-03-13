@@ -10,7 +10,7 @@ namespace Contracts
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string[] Skills { get; set; }
-    public bool HasAsignment { get; set; }
+    public bool HasAssignment { get; set; }
 
     public Guid Assignment { get; set; }
   }

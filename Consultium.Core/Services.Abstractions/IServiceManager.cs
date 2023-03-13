@@ -9,5 +9,6 @@ namespace Services.Abstractions
   {
     ICustomerService CustomerService { get; }
     IConsultantService ConsultantService { get; }
+    IUserService UserService { get; }
   }
 }

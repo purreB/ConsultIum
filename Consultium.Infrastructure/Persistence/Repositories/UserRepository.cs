@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 using Consultium.Infrastructure;
 using Domain.Entities;
 using Domain.RepositoryInterface;
+using Microsoft.EntityFrameworkCore;
 
 namespace Persistence.Repositories
 {
-  public class UserRepository : IUserRepository
+  internal sealed class UserRepository : IUserRepository
   {
 
     private readonly RepositoryDbContext _dbContext;
@@ -18,9 +19,10 @@ namespace Persistence.Repositories
       throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<User>> GetAllUsers(CancellationToken cancellationToken)
+    public async Task<IEnumerable<User>> GetAllUsers(CancellationToken cancellationToken)
     {
-      throw new NotImplementedException();
+      var users = await _dbContext.users.ToListAsync(cancellationToken);
+      return users;
     }
 
     public Task<User> GetUserById(Guid id)

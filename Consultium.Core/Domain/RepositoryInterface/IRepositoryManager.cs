@@ -9,6 +9,7 @@ namespace Domain.RepositoryInterface
   {
     IConsultantRepository ConsultantRepository { get; }
     ICustomerRepository CustomerRepository { get; }
+    IUserRepository UserRepository { get; }
     IUnitOfWork UnitOfWork { get; }
   }
 }

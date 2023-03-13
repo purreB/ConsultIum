@@ -16,9 +16,19 @@ namespace Consultium.Api.Controllers
     public UsersController(IServiceManager serviceManager) => _serviceManager = serviceManager;
 
     [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<UserDto>))]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetAllUsers()
     {
-      return Ok();
+      var Users = await _serviceManager.UserService.GetAllAsync();
+      if (Users == null || Users.Count() == 0)
+      {
+        return NotFound("There are currently no users");
+      }
+      else
+      {
+        return Ok(Users);
+      }
     }
   }
 }

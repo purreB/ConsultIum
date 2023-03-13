@@ -25,7 +25,7 @@ namespace Domain.Entities
     public string[] Skills { get; set; }
 
     [Required]
-    public Boolean HasAsignment { get; set; }
+    public Boolean HasAssignment { get; set; }
 
     public Guid? CustomerId { get; set; }
 
