@@ -70,7 +70,6 @@ namespace Consultium.Api.Controllers
         consultant.Skills = consult.Skills;
         consultant.HasAsignment = consult.HasAsignment;
 
-        //! DO UNIT OF WORK COMPLETE INSIDE SERVICE
         _serviceManager.ConsultantService.UpdateConsultant(consultant);
 
         return CreatedAtAction(nameof(GetById), new { id = consult.Id }, consultant);
