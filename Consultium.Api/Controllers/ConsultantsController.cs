@@ -53,7 +53,7 @@ namespace Consultium.Api.Controllers
     public async Task<IActionResult> AddConsultant(ConsultantForCreationDto consultantForCreationDto)
     {
       var consultantDto = await _serviceManager.ConsultantService.CreateAsync(consultantForCreationDto);
-      return CreatedAtAction(nameof(GetById), new { id = consultantDto.Id });
+      return CreatedAtAction(nameof(GetById), new { id = consultantDto.ConsultantId }, consultantDto);
     }
 
     [HttpPatch]

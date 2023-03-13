@@ -21,7 +21,8 @@ namespace Services
       var consultatForCreation = consultantForCreationDto.Adapt<Consultant>();
       _repositoryManager.ConsultantRepository.AddConsultant(consultatForCreation);
       await _repositoryManager.UnitOfWork.SaveChangesAsync(cancellationToken);
-      return consultatForCreation.Adapt<ConsultantForCreationDto>();
+      var consultantToReturn = consultatForCreation.Adapt<ConsultantForCreationDto>();
+      return consultantToReturn;
     }
 
     public async Task<IEnumerable<ConsultantDto>> GetAllAsync(CancellationToken cancellationToken = default)
