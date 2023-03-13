@@ -7,6 +7,7 @@ using Domain.Entities;
 using Domain.RepositoryInterface;
 using Mapster;
 using Services.Abstractions;
+using Domain.Exceptions;
 
 namespace Services
 {
@@ -19,10 +20,6 @@ namespace Services
     public async Task<IEnumerable<ConsultantDto>> GetAllAsync(CancellationToken cancellationToken = default)
     {
       var Consultants = await _repositoryManager.ConsultantRepository.GetAllConsultants(cancellationToken);
-      if (Consultants == null)
-      {
-        throw new ArgumentException(nameof(Consultants));
-      }
       var consultantDto = Consultants.Adapt<IEnumerable<ConsultantDto>>();
       return consultantDto;
     }
@@ -30,9 +27,9 @@ namespace Services
     public async Task<ConsultantDto> GetByIdAsync(Guid Id, CancellationToken cancellationToken = default)
     {
       var Consultant = await _repositoryManager.ConsultantRepository.GetConsultantById(Id);
-      if (Consultant == null)
+      if (Consultant is null)
       {
-        throw new ArgumentException(nameof(Consultant));
+        throw new EntityNotFoundException(Id);
       }
       var consultantDto = Consultant.Adapt<ConsultantDto>();
       return consultantDto;
