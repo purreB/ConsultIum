@@ -27,7 +27,7 @@ namespace Consultium.Api.Controllers
       var Consultants = await _serviceManager.ConsultantService.GetAllAsync();
       if (!Consultants.Any())
       {
-        return NotFound();
+        return NotFound("There are no currently no consultants");
       }
       else
       {
