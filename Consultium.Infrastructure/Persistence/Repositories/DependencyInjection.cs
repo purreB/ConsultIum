@@ -11,6 +11,7 @@ namespace Persistence.Repositories
       services.AddTransient<IConsultantRepository, ConsultantRepository>();
       services.AddTransient<ICustomerRepository, CustomerRepository>();
       services.AddTransient<IUnitOfWork, UnitOfWork>();
+      services.AddTransient<IUserRepository, UserRepository>();
 
       services.AddDbContext<RepositoryDbContext>();
       return services;
