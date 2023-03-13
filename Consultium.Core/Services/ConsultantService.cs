@@ -27,10 +27,6 @@ namespace Services
     public async Task<ConsultantDto> GetByIdAsync(Guid Id, CancellationToken cancellationToken = default)
     {
       var Consultant = await _repositoryManager.ConsultantRepository.GetConsultantById(Id);
-      if (Consultant is null)
-      {
-        throw new EntityNotFoundException(Id);
-      }
       var consultantDto = Consultant.Adapt<ConsultantDto>();
       return consultantDto;
     }

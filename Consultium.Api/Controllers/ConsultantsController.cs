@@ -8,6 +8,7 @@ using Domain.RepositoryInterface;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 using Services.Abstractions;
+using Domain.Exceptions;
 
 namespace Consultium.Api.Controllers
 {
@@ -42,7 +43,7 @@ namespace Consultium.Api.Controllers
       var Consultant = await _serviceManager.ConsultantService.GetByIdAsync(id);
       if (Consultant == null)
       {
-        return NotFound();
+        return NotFound($"The entity with the id: '{id}' was not found.");
       }
       return Ok(Consultant);
     }
