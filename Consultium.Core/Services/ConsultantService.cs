@@ -33,10 +33,10 @@ namespace Services
 
     public async Task<ConsultantDto> CreateAsync(ConsultantForCreationDto consultantForCreationDto, CancellationToken cancellationToken = default)
     {
-      var consultatForCreation = consultantForCreationDto.Adapt<Consultant>();
-      _repositoryManager.ConsultantRepository.AddConsultant(consultatForCreation);
+      var consultantForCreation = consultantForCreationDto.Adapt<Consultant>();
+      _repositoryManager.ConsultantRepository.AddConsultant(consultantForCreation);
       await _repositoryManager.UnitOfWork.SaveChangesAsync(cancellationToken);
-      var consultantToReturn = consultatForCreation.Adapt<ConsultantDto>();
+      var consultantToReturn = consultantForCreation.Adapt<ConsultantDto>();
       return consultantToReturn;
     }
 

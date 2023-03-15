@@ -30,5 +30,29 @@ namespace Consultium.Api.Controllers
         return Ok(Users);
       }
     }
+
+    [HttpGet("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserDto))]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetById(Guid id)
+    {
+      var User = await _serviceManager.UserService.GetByIdAsync(id);
+      if (User == null)
+      {
+        return NotFound($"The entity with the id: {id} was not found.");
+      }
+
+      return Ok(User);
+    }
+    
+    [HttpPost]
+    [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(UserDto))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> CreateUser(UserForCreationDto userForCreationDto)
+    {
+      var userDto = await _serviceManager.UserService.CreateAsync(userForCreationDto);
+      return CreatedAtAction(nameof(GetById), new { id = userDto.UserId }, userDto);
+    }
+
   }
 }

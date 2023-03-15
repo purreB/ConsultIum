@@ -14,10 +14,7 @@ namespace Persistence.Repositories
 
     private readonly RepositoryDbContext _dbContext;
     public UserRepository(RepositoryDbContext dbContext) => _dbContext = dbContext;
-    public void AddUser(User user)
-    {
-      throw new NotImplementedException();
-    }
+    public void AddUser(User user) => _dbContext.users.Add(user);
 
     public async Task<IEnumerable<User>> GetAllUsers(CancellationToken cancellationToken)
     {
@@ -25,10 +22,7 @@ namespace Persistence.Repositories
       return users;
     }
 
-    public Task<User> GetUserById(Guid id)
-    {
-      throw new NotImplementedException();
-    }
+    public async Task<User> GetUserById(Guid id) => await _dbContext.users.FindAsync(id);
 
     public void UpdateUser(User user)
     {
