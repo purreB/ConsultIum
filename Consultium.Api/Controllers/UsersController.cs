@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Services.Abstractions;
@@ -53,6 +49,14 @@ namespace Consultium.Api.Controllers
       var userDto = await _serviceManager.UserService.CreateAsync(userForCreationDto);
       return CreatedAtAction(nameof(GetById), new { id = userDto.UserId }, userDto);
     }
+    
+    // [HttpDelete("{id}")]
+    // [ProducesResponseType(StatusCodes.Status204NoContent)]
+    // public async Task<IActionResult> DeleteConsultant(UserDto userDto)
+    // {
+    //   await _serviceManager.UserService
+    //   return NoContent();
+    // }
 
   }
 }

@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Contracts;
 using Domain.Entities;
 using Domain.RepositoryInterface;
@@ -19,15 +15,15 @@ namespace Services
 
     public async Task<IEnumerable<ConsultantDto>> GetAllAsync(CancellationToken cancellationToken = default)
     {
-      var Consultants = await _repositoryManager.ConsultantRepository.GetAllConsultants(cancellationToken);
-      var consultantDto = Consultants.Adapt<IEnumerable<ConsultantDto>>();
+      var consultants = await _repositoryManager.ConsultantRepository.GetAllConsultants(cancellationToken);
+      var consultantDto = consultants.Adapt<IEnumerable<ConsultantDto>>();
       return consultantDto;
     }
 
-    public async Task<ConsultantDto> GetByIdAsync(Guid Id, CancellationToken cancellationToken = default)
+    public async Task<ConsultantDto> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
-      var Consultant = await _repositoryManager.ConsultantRepository.GetConsultantById(Id);
-      var consultantDto = Consultant.Adapt<ConsultantDto>();
+      var consultant = await _repositoryManager.ConsultantRepository.GetConsultantById(id);
+      var consultantDto = consultant.Adapt<ConsultantDto>();
       return consultantDto;
     }
 
