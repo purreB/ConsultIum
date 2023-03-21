@@ -3,7 +3,6 @@ using Domain.Entities;
 using Domain.RepositoryInterface;
 using Mapster;
 using Services.Abstractions;
-using Domain.Exceptions;
 
 namespace Services
 {

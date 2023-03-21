@@ -49,14 +49,22 @@ namespace Consultium.Api.Controllers
       var userDto = await _serviceManager.UserService.CreateAsync(userForCreationDto);
       return CreatedAtAction(nameof(GetById), new { id = userDto.UserId }, userDto);
     }
+
+    [HttpPatch("{id:guid}")]
+    public async Task<IActionResult> UpdateUser(UserForUpdateDto userForUpdateDto, Guid id, CancellationToken cancellationToken)
+    {
+      var userDto = await _serviceManager.UserService.UpdateUser(userForUpdateDto, id, cancellationToken);
+      return CreatedAtAction(nameof(GetById), new { id = userDto.UserId}, userDto);
+    }
     
-    // [HttpDelete("{id}")]
-    // [ProducesResponseType(StatusCodes.Status204NoContent)]
-    // public async Task<IActionResult> DeleteConsultant(UserDto userDto)
-    // {
-    //   await _serviceManager.UserService
-    //   return NoContent();
-    // }
+    
+    [HttpDelete]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> DeleteConsultant( UserDto userDto, CancellationToken cancellationToken)
+    {
+      await _serviceManager.UserService.DeleteUser(userDto, cancellationToken);
+      return NoContent();
+    }
 
   }
 }

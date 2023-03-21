@@ -49,7 +49,7 @@ namespace Consultium.Api.Controllers
       return CreatedAtAction(nameof(GetById), new { id = consultantDto.ConsultantId }, consultantDto);
     }
 
-    [HttpPatch("{id}")]
+    [HttpPatch("{id:guid}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ConsultantDto))]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> UpdateConsultant(ConsultantForUpdateDto consultant, Guid id)

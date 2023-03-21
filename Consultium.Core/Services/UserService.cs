@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Contracts;
 using Domain.Entities;
 using Domain.RepositoryInterface;
@@ -37,9 +33,30 @@ namespace Services
       return userDto;
     }
 
-    public Task<UserDto> UpdateUser(UserForUpdateDto userForUpdateDto, Guid id, CancellationToken cancellationToken = default)
+    public async Task<UserDto> UpdateUser(UserForUpdateDto userForUpdateDto, Guid id, CancellationToken cancellationToken = default)
     {
-      throw new NotImplementedException();
+      var userToUpdate = userForUpdateDto.Adapt<User>();
+      userToUpdate.UserId = id;
+      _repositoryManager.UserRepository.UpdateUser(userToUpdate);
+      await _repositoryManager.UnitOfWork.SaveChangesAsync(cancellationToken);
+      var userToReturn = userToUpdate.Adapt<UserDto>();
+      return userToReturn;
+    }
+
+    public async Task DeleteUser(UserDto userDto, CancellationToken cancellationToken)
+    {
+      try
+      {
+        var userToDelete = userDto.Adapt<User>();
+        _repositoryManager.UserRepository.DeleteUser(userToDelete);
+        await _repositoryManager.UnitOfWork.SaveChangesAsync(cancellationToken);
+       
+      }
+      catch (Exception e)
+      {
+        Console.WriteLine(e);
+        throw;
+      }
     }
   }
 }
